@@ -1,4 +1,5 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import { Book } from '../books/book.entity';
 
 @Table
 export class User extends Model {
@@ -29,4 +30,9 @@ export class User extends Model {
 
   @Column
   active: boolean;
+
+  @HasMany(() => Book, { 
+    foreignKey: "userUid"
+  })
+  books: Book[];
 }

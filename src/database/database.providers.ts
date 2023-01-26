@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from "../users/user.entity";
+import { Book } from 'src/modules/books/book.entity';
+import { User } from "../modules/users/user.entity";
 
 //TODO put in env file
 export const databaseProviders = [
@@ -14,7 +15,7 @@ export const databaseProviders = [
         password: 'password',
         database: 'qsoftware',
       });
-      sequelize.addModels([User]);
+      sequelize.addModels([User, Book]);
       await sequelize.sync();
       return sequelize;
     },
