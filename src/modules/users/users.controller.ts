@@ -7,6 +7,7 @@ import {
   Put,
   Delete,
   NotFoundException,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
@@ -18,8 +19,9 @@ export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Get()
-  async getUsers() {
-    return this.userService.findAll();
+  async getUsers(@Query() query) {
+    console.log(query);
+    return this.userService.getUsers(query);
   }
 
   @Post('new')

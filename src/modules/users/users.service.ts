@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { Book } from '../books/book.entity';
 
 @Injectable()
 export class UsersService {
@@ -9,8 +10,13 @@ export class UsersService {
     private usersRepository: typeof User,
   ) {}
 
-  async findAll(): Promise<User[]> {
-    return this.usersRepository.findAll<User>();
+  async getUsers(query): Promise<{count: number; rows: User[]}> {
+    return this.usersRepository.findAndCountAll({
+      attributes: {exclude: ['deleteAt']},
+      include: [{model: Book, as: 'books'}],
+      offset: query?.cursor ?? 0,
+      limit: query?.limit ?? 10,
+    });
   }
 
   async createUser(body: CreateUserDto): Promise<User> {
