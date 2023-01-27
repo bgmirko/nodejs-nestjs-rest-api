@@ -1,4 +1,5 @@
 import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import { RoleType } from 'src/utils/enums';
 import { Book } from '../books/book.entity';
 
 @Table
@@ -26,7 +27,7 @@ export class User extends Model {
   email: string;
 
   @Column
-  role: string;
+  role: RoleType;
 
   @Column
   active: boolean;
