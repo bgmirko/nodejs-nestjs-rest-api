@@ -6,7 +6,7 @@ import {
   generateRefreshAccessToken,
 } from 'src/utils/jwtToken';
 import { TokenUserPayload, TokenData } from '../../utils/enums';
-import jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
@@ -55,7 +55,7 @@ export class AuthService {
       throw new Error('refreshToken missing');
     }
 
-    jwt.verify(
+    verify(
       body.refreshToken,
       process.env.ACCESS_TOKEN_SECRET, 
       (err: any, userTokenData: TokenData) => {
