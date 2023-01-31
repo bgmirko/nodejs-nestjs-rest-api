@@ -8,10 +8,12 @@ import {
   Put,
   Delete,
   NotFoundException,
+  Req,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book';
+import { RequestCustom, RoleType, TokenUserPayload } from '../../utils/enums';
 
 @Controller('books')
 export class BookController {
@@ -40,19 +42,19 @@ export class BookController {
     };
   }
 
-  @Delete("/:id")
-  async deleteBook(@Param('id') id: number) {
+  @Delete('/:id')
+  async deleteBook(@Param('id') id: number, @Req() req: RequestCustom) {
     const book = await this.bookService.getBookById(id);
     if (!book) {
       throw new NotFoundException("Book doesn't exists");
     }
-    //   const userData: TokenUserPayload = req.user;
-    //   if (userData.role === RoleType.Author && book.userUid !== userData.uuid) {
-    //     return res.status(400).json({
-    //       success: false,
-    //       message: 'Author Role can delete only own books',
-    //     });
-    //   }
+    const userData: TokenUserPayload = req.user;
+    if (userData.role === RoleType.Author && book.userUid !== userData.uuid) {
+      return {
+        success: false,
+        message: 'Author Role can delete only own books',
+      };
+    }
     await this.bookService.deleteBook(id);
     return {
       success: true,
@@ -60,19 +62,23 @@ export class BookController {
     };
   }
 
-  @Put("/:id")
-  async updateBook(@Param('id') id: number, @Body() body: Partial<Book>) {
+  @Put('/:id')
+  async updateBook(
+    @Param('id') id: number,
+    @Body() body: Partial<Book>,
+    @Req() req: RequestCustom,
+  ) {
     const book = await this.bookService.getBookById(id);
     if (!book) {
       throw new NotFoundException("Book doesn't exists");
     }
-    //   const userData: TokenUserPayload = req.user;
-    //   if (userData.role === RoleType.Author && book.userUid !== userData.uuid) {
-    //     return res.status(400).json({
-    //       success: false,
-    //       message: 'Author Role can delete only own books',
-    //     });
-    //   }
+    const userData: TokenUserPayload = req.user;
+    if (userData.role === RoleType.Author && book.userUid !== userData.uuid) {
+      return {
+        success: false,
+        message: 'Author Role can update only own books',
+      };
+    }
     const updatedBook = await this.bookService.updateBook(id, body);
     return {
       success: true,
