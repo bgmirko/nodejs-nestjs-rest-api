@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
-import { RoleType } from 'src/utils/enums';
+import { RoleType } from 'src/utils/definitions';
 import { Book } from '../books/book.entity';
 
 @Table

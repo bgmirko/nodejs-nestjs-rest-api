@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken';
-import {TokenUserPayload} from './enums';
+import {TokenUserPayload} from './definitions';
 
 export const generateAccessToken = (user: TokenUserPayload) => {
   return sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'}); // TODO change to 10m

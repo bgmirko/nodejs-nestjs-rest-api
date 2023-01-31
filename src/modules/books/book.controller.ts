@@ -13,7 +13,7 @@ import {
 import { BookService } from './book.service';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book';
-import { RequestCustom, RoleType, TokenUserPayload } from '../../utils/enums';
+import { RequestCustom, RoleType, TokenUserPayload } from '../../utils/definitions';
 
 @Controller('books')
 export class BookController {

@@ -12,7 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { RoleType } from 'src/utils/enums';
+import { RoleType } from 'src/utils/definitions';
 
 @Controller('users')
 export class UsersController {

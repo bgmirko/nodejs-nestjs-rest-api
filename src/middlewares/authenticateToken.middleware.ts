@@ -1,5 +1,5 @@
 import { verify } from 'jsonwebtoken';
-import { RequestCustom } from '../utils/enums';
+import { RequestCustom } from '../utils/definitions';
 import { User } from '../modules/users/user.entity';
 import { Response, NextFunction } from 'express';
 import { NestMiddleware, Injectable } from '@nestjs/common';

@@ -5,7 +5,7 @@ import {
   generateAccessToken,
   generateRefreshAccessToken,
 } from 'src/utils/jwtToken';
-import { TokenUserPayload, TokenData } from '../../utils/enums';
+import { TokenUserPayload, TokenData } from '../../utils/definitions';
 import { verify } from 'jsonwebtoken';
 
 @Injectable()
