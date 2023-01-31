@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import bcrypt from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import {
   generateAccessToken,
   generateRefreshAccessToken,
@@ -29,7 +29,7 @@ export class AuthService {
       };
     }
 
-    if (await bcrypt.compare(password, user.password)) {
+    if (await compare(password, user.password)) {
       const userTokenData: TokenUserPayload = {
         uuid: user.uuid,
         role: user.role,
@@ -55,10 +55,9 @@ export class AuthService {
       throw new Error('refreshToken missing');
     }
 
-    // TODO put in env file
     jwt.verify(
       body.refreshToken,
-      '754819d3ded9b9716478ae3c3b0047dd586b444e548783d58fea09bf4dc1f86196f426fbeeb84e03ada02266dcd6f83bcce0d7cd7ade3ced08a831b7d2bf7467', 
+      process.env.ACCESS_TOKEN_SECRET, 
       (err: any, userTokenData: TokenData) => {
         if (err) {
           return {

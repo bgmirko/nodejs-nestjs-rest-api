@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { Book } from '../books/book.entity';
+import { hash } from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -10,17 +11,20 @@ export class UsersService {
     private usersRepository: typeof User,
   ) {}
 
-  async getUsers(query): Promise<{count: number; rows: User[]}> {
+  async getUsers(query): Promise<{ count: number; rows: User[] }> {
     return this.usersRepository.findAndCountAll({
-      attributes: {exclude: ['deleteAt']},
-      include: [{model: Book, as: 'books'}],
+      attributes: { exclude: ['deleteAt'] },
+      include: [{ model: Book, as: 'books' }],
       offset: query?.cursor ?? 0,
       limit: query?.limit ?? 10,
     });
   }
 
   async createUser(body: CreateUserDto): Promise<User> {
-    return this.usersRepository.create({ ...body });
+    return this.usersRepository.create({
+      ...body,
+      ...(body.password && { password: await hash(body.password, 12) }),
+    });
   }
 
   async getUserById(id: string): Promise<User> {
