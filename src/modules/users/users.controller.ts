@@ -24,13 +24,12 @@ export class UsersController {
     return this.userService.getUsers(query);
   }
 
-  @Post('new')
+  @Post()
   async createUser(@Body() body: CreateUserDto) {
     return this.userService.createUser(body);
   }
 
-  // TODO "update" in route is unnecessary
-  @Put('update/:id')
+  @Put('/:id')
   async updateUser(@Param('id') id: string, @Body() body: Partial<User>) {
     const user = await this.userService.getUserById(id);
     if (!user) {
@@ -39,8 +38,7 @@ export class UsersController {
     return this.userService.updateUser(id, body);
   }
 
-  // TODO "delete" in route is unnecessary
-  @Delete("delete/:id")
+  @Delete("/:id")
   async softDeleteUser(@Param('id') id: string) {
     const user = await this.userService.getUserById(id);
     if (!user) {

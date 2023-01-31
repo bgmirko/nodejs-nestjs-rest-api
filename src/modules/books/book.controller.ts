@@ -19,7 +19,6 @@ export class BookController {
 
   @Get()
   async getBooks(@Query() query) {
-    console.log("usaoooo")
     const { rows, count } = await this.bookService.getBooks(query);
     return {
       success: true,
@@ -31,7 +30,7 @@ export class BookController {
     };
   }
 
-  @Post('new')
+  @Post()
   async createBook(@Body() body: CreateBookDto) {
     const book = await this.bookService.createBook(body);
     return {
@@ -41,7 +40,7 @@ export class BookController {
     };
   }
 
-  @Delete("delete/:id")
+  @Delete("/:id")
   async deleteBook(@Param('id') id: number) {
     const book = await this.bookService.getBookById(id);
     if (!book) {
@@ -61,7 +60,7 @@ export class BookController {
     };
   }
 
-  @Put("update/:id")
+  @Put("/:id")
   async updateBook(@Param('id') id: number, @Body() body: Partial<Book>) {
     const book = await this.bookService.getBookById(id);
     if (!book) {
