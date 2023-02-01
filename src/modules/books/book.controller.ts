@@ -9,7 +9,7 @@ import {
   Delete,
   NotFoundException,
   Req,
-  UseGuards,
+  UseGuards
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './book.entity';

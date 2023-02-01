@@ -8,17 +8,26 @@ import {
   Delete,
   NotFoundException,
   Query,
+  UseInterceptors
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { RoleType } from 'src/utils/definitions';
+import { LoggingInterceptor } from '../../interceptors/consoleLogging.interceptor';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @Get('/whoami')
+  async whoAmI(@CurrentUser({example: 'data to send to decorator'}) user: User){
+    return user;
+  }
+
   @Get()
+  @UseInterceptors(LoggingInterceptor)
   async getUsers(@Query() query) {
     console.log(query);
     return this.userService.getUsers(query);
