@@ -20,3 +20,18 @@ export interface TokenData {
   iat: string;
   exp: string;
 }
+
+export interface ResponseData {
+  message: string;
+  success: boolean;
+}
+
+export interface ResponseTokenData extends ResponseData {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface LoginRequestBody {
+  username: string;
+  password: string;
+}

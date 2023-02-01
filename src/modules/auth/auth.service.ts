@@ -4,15 +4,21 @@ import { compare } from 'bcryptjs';
 import {
   generateAccessToken,
   generateRefreshAccessToken,
-} from 'src/utils/jwtToken';
-import { TokenUserPayload, TokenData } from '../../utils/definitions';
+} from '../../utils/jwtToken';
+import {
+  TokenUserPayload,
+  TokenData,
+  ResponseTokenData,
+  ResponseData,
+  LoginRequestBody
+} from '../../utils/definitions';
 import { verify } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
   constructor(private userService: UsersService) {}
 
-  async loginUser(body: any) {
+  async loginUser(body: LoginRequestBody) {
     const password: string = body.password;
     const username: string = body.username;
 
@@ -41,23 +47,23 @@ export class AuthService {
         accessToken,
         refreshToken,
         message: 'User login successfully',
-      };
+      } as ResponseTokenData;
     } else {
       return {
         success: false,
         message: 'Username or password are not correct',
-      };
+      } as ResponseData;
     }
   }
 
-  async refreshToken(body: any) {
+  async refreshToken(body: { refreshToken: string}) {
     if (!body.refreshToken) {
       throw new Error('refreshToken missing');
     }
 
     verify(
       body.refreshToken,
-      process.env.ACCESS_TOKEN_SECRET, 
+      process.env.ACCESS_TOKEN_SECRET,
       (err: any, userTokenData: TokenData) => {
         if (err) {
           return {

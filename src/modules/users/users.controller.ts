@@ -13,9 +13,9 @@ import {
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { RoleType } from 'src/utils/definitions';
+import { RoleType } from '../../utils/definitions';
 import { LoggingInterceptor } from '../../interceptors/consoleLogging.interceptor';
-import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { CurrentUser } from '../../decorators/current-user.decorator';
 
 @Controller('users')
 export class UsersController {
