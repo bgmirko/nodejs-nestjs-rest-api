@@ -2,14 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import { ResponseTokenData } from '../../utils/definitions';
+import { NotFoundException } from '@nestjs/common';
+import { User } from '../users/user.entity';
 require('dotenv').config();
 
 describe('AuthService', () => {
   let service: AuthService;
+  let fakeUserService;
 
   beforeEach(async () => {
     // Create a fake copy of the user service
-    const fakeUserService = {
+    fakeUserService = {
       getUserByUsername: (username: string) =>
         Promise.resolve({
           uuid: '956b086d-f22d-43a3-8966-77d412555c3e',
@@ -58,5 +61,14 @@ describe('AuthService', () => {
       password: 'wrongPassword',
     })) as ResponseTokenData;
     expect(result.success).toBeFalsy();
+  });
+
+  it(`log user with username which doesn't exist should throw error`, async () => {
+    fakeUserService.getUserByUsername = (username: string) => Promise.resolve(null);
+    const result = (await service.loginUser({
+      username: 'UsernameNotExists',
+      password: 'test123',
+    })) as NotFoundException;
+    expect(result.getStatus()).toBe(404);
   });
 });
