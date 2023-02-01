@@ -9,17 +9,20 @@ import {
   Delete,
   NotFoundException,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book';
 import { RequestCustom, RoleType, TokenUserPayload } from '../../utils/definitions';
+import { AdminGuard } from '../../guards/admin.guard';
 
 @Controller('books')
 export class BookController {
   constructor(private bookService: BookService) {}
 
   @Get()
+  @UseGuards(AdminGuard)
   async getBooks(@Query() query) {
     const { rows, count } = await this.bookService.getBooks(query);
     return {
