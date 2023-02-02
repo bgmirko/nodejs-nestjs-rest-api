@@ -3,7 +3,6 @@ import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import { ResponseTokenData } from '../../utils/definitions';
 import { NotFoundException } from '@nestjs/common';
-import { User } from '../users/user.entity';
 require('dotenv').config();
 
 describe('AuthService', () => {
