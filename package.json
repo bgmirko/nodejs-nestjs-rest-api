@@ -59,6 +59,16 @@
     "tsconfig-paths": "4.1.1",
     "typescript": "^4.7.4"
   },
+  "keywords": [
+    "node.js",
+    "nest.js",
+    "typescript",
+    "postgres",
+    "sequelize",
+    "sequelize-typescript",
+    "jest",
+    "rest api"
+  ],
   "jest": {
     "moduleFileExtensions": [
       "js",
