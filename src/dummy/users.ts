@@ -28,4 +28,16 @@ export const users: Partial<User>[] = [
     updatedAt: new Date(),
     deletedAt: null,
   },
+  {
+    uuid: '8b85d6f8-02ef-47d3-ab3c-f8074cbaf2d8',
+    firstName: 'Ana',
+    lastName: 'Zaric',
+    username: 'anaana',
+    password: '$2a$12$0N4PGM8apYEWFiC2pY8FU.boLS6YqXGkkUqWraDYJR0QfiJVIRU.y',
+    email: 'ana@gmail.com',
+    role: RoleType.Author,
+    active: true,
+    createdAt: '2023-01-25T15:26:09.196Z',
+    updatedAt: '2023-01-25T15:26:09.196Z',
+  },
 ];

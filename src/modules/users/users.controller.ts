@@ -29,7 +29,6 @@ export class UsersController {
   @Get()
   @UseInterceptors(LoggingInterceptor)
   async getUsers(@Query() query) {
-    console.log(query);
     return this.userService.getUsers(query);
   }
 
@@ -50,8 +49,9 @@ export class UsersController {
   @Delete("/:id")
   async softDeleteUser(@Param('id') id: string) {
     const user = await this.userService.getUserById(id);
+    console.log(user);
     if (!user) {
-      return new NotFoundException("User doesn't exists");
+      throw new NotFoundException("User doesn't exists");
     }
     if (user.role === RoleType.Admin && user.active) {
       return {
