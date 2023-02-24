@@ -1,53 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BookController } from './book.controller';
 import { BookService } from './book.service';
-import { RequestCustom, RoleType } from '../../utils/definitions';
-import { User } from 'modules/users/user.entity';
+import { RequestCustom } from '../../utils/definitions';
+import { users } from '../../dummy/users';
+import { books } from '../../dummy/books';
 import { NotFoundException } from '@nestjs/common';
 
 describe('BookController', () => {
   let controller: BookController;
 
-  const users: Partial<User>[] = [
-    {
-      uuid: '956b086d-f22d-43a3-8966-77d412555c3e',
-      firstName: 'Petar',
-      active: true,
-      lastName: 'Petrovic',
-      username: 'petar80',
-      password: '$2a$12$m55yaasWCQIq6F9X/5K4BeQ9BgMw78JwRv.QAx9.eJ3qvf2R1sgUS',
-      email: 'petar@gmail.com',
-      role: RoleType.Admin,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-    },
-    {
-      uuid: '333b086d-f22d-43a3-8966-77d412555tgy',
-      firstName: 'Ivana',
-      active: true,
-      lastName: 'Mandic',
-      username: 'ivana_fx',
-      password: '$2a$12$m55yaasWCQIq6F9X/5K4BeQ9BgMw78JwRv.QAx9.eJ3qvf2R1sgUS',
-      email: 'ivana@gmail.com',
-      role: RoleType.Author,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-    },
-  ];
-
   const mockBookService = {
-    getBookById: jest.fn((id: number) => ({
-      id: 1,
-      userUid: '956b086d-f22d-43a3-8966-77d412555c3e',
-      title: 'The Night Ship',
-      publisher: 'Laguna',
-      description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500`,
-      genre: 'Science fiction',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })),
+    getBookById: jest.fn((id: number) => (books[0])),
     deleteBook: jest.fn((id: number) => 1),
   };
 
