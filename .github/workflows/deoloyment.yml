@@ -4,5 +4,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: "Display text"
-        run: echo "Hello world"
+      - name: "Get code"
+        uses: actions/checkout@v3
+      - name: "List files"
+        run: ls -R
