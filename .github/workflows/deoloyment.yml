@@ -31,5 +31,5 @@ jobs:
       - name: Install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Run tests
+      - name: Run Lint check
         run: npm run lint
