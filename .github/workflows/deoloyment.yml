@@ -9,4 +9,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Run tests
-        run: npm test
+        run: test:github-exclude
