@@ -1,7 +1,7 @@
 name: Deploy Project
 on: [push, workflow_dispatch]
 jobs:
-  test:
+  jest-test:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -13,6 +13,23 @@ jobs:
           path: node_modules
           key: cache-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: yarn install
       - name: Run tests
         run: npm run test:github-exclude
+  lint-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Run tests
+        run: npm run lint
