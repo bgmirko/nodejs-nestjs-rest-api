@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
-
 // TODO create tests for Auth controller
 describe('AuthController', () => {
   let controller: AuthController;

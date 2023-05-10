@@ -8,7 +8,7 @@ import {
   Delete,
   NotFoundException,
   Query,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
@@ -22,7 +22,9 @@ export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Get('/whoami')
-  async whoAmI(@CurrentUser({example: 'data to send to decorator'}) user: User){
+  async whoAmI(
+    @CurrentUser({ example: 'data to send to decorator' }) user: User,
+  ) {
     return user;
   }
 
@@ -46,7 +48,7 @@ export class UsersController {
     return this.userService.updateUser(id, body);
   }
 
-  @Delete("/:id")
+  @Delete('/:id')
   async softDeleteUser(@Param('id') id: string) {
     const user = await this.userService.getUserById(id);
     console.log(user);

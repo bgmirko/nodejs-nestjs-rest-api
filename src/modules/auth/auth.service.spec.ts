@@ -63,7 +63,8 @@ describe('AuthService', () => {
   });
 
   it(`log user with username which doesn't exist should throw error`, async () => {
-    fakeUserService.getUserByUsername = (username: string) => Promise.resolve(null);
+    fakeUserService.getUserByUsername = (username: string) =>
+      Promise.resolve(null);
     const result = (await service.loginUser({
       username: 'UsernameNotExists',
       password: 'test123',

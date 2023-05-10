@@ -10,7 +10,7 @@ import {
   TokenData,
   ResponseTokenData,
   ResponseData,
-  LoginRequestBody
+  LoginRequestBody,
 } from '../../utils/definitions';
 import { verify } from 'jsonwebtoken';
 
@@ -56,7 +56,7 @@ export class AuthService {
     }
   }
 
-  async refreshToken(body: { refreshToken: string}) {
+  async refreshToken(body: { refreshToken: string }) {
     if (!body.refreshToken) {
       throw new Error('refreshToken missing');
     }

@@ -11,8 +11,6 @@ import { AppController } from './app.controller';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthenticateUserToken).forRoutes(
-        'books', "users"
-    );
+    consumer.apply(AuthenticateUserToken).forRoutes('books', 'users');
   }
 }

@@ -32,8 +32,8 @@ export class User extends Model {
   @Column
   active: boolean;
 
-  @HasMany(() => Book, { 
-    foreignKey: "userUid"
+  @HasMany(() => Book, {
+    foreignKey: 'userUid',
   })
   books: Book[];
 }

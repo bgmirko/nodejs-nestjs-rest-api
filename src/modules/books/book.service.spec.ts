@@ -5,9 +5,7 @@ import { bookProviders } from './book.providers';
 
 describe('BooksService', () => {
   let service: BookService;
-  const mockBookRepository = {
-
-  }
+  const mockBookRepository = {};
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -25,5 +23,5 @@ describe('BooksService', () => {
   it('Expect to get data from database', async () => {
     const result = await service.getBookById(1);
     expect(typeof result).toBe('object');
-  })
+  });
 });

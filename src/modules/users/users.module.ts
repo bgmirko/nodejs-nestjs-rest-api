@@ -8,6 +8,6 @@ import { usersProviders } from './user.providers';
   imports: [DatabaseModule],
   controllers: [UsersController],
   providers: [UsersService, ...usersProviders],
-  exports: [UsersService]
+  exports: [UsersService],
 })
 export class UsersModule {}

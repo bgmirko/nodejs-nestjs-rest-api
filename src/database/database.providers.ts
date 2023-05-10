@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Book } from '../modules/books/book.entity';
-import { User } from "../modules/users/user.entity";
+import { User } from '../modules/users/user.entity';
 require('dotenv').config();
 
 export const databaseProviders = [

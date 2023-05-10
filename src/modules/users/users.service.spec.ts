@@ -128,14 +128,16 @@ describe('UsersService', () => {
 
     const result = await service.createUser(newUser);
 
-    expect({...result, password: ""}).toStrictEqual({...newUser, password: ""});
+    expect({ ...result, password: '' }).toStrictEqual({
+      ...newUser,
+      password: '',
+    });
   });
 
   it('Expect that delete of user will remove user and return 1 (1 row deleted)', async () => {
-
     const id = '956b086d-f22d-43a3-8966-77d412555c34';
 
-    const mockDeleteUser = mockUserRepository.destroy.mockResolvedValue(1)
+    const mockDeleteUser = mockUserRepository.destroy.mockResolvedValue(1);
 
     const result = await service.softDeleteUser(id);
 
@@ -146,5 +148,5 @@ describe('UsersService', () => {
     });
 
     expect(result).toBe(1);
-  })
+  });
 });

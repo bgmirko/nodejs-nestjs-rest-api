@@ -10,7 +10,7 @@ describe('BookController', () => {
   let controller: BookController;
 
   const mockBookService = {
-    getBookById: jest.fn((id: number) => (books[0])),
+    getBookById: jest.fn((id: number) => books[0]),
     deleteBook: jest.fn((id: number) => 1),
   };
 
@@ -59,9 +59,13 @@ describe('BookController', () => {
       user: users[0],
     } as any as RequestCustom;
 
-    mockBookService.getBookById = jest.fn((id: number) => null)
+    mockBookService.getBookById = jest.fn((id: number) => null);
 
-    await expect(controller.deleteBook(1, mockRequest)).rejects.toThrow(NotFoundException);
-    await expect(controller.deleteBook(1, mockRequest)).rejects.toThrow(`Book doesn't exists`);    
+    await expect(controller.deleteBook(1, mockRequest)).rejects.toThrow(
+      NotFoundException,
+    );
+    await expect(controller.deleteBook(1, mockRequest)).rejects.toThrow(
+      `Book doesn't exists`,
+    );
   });
 });

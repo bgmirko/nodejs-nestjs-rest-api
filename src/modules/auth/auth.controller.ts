@@ -4,8 +4,7 @@ import { LoginRequestBody } from '../../utils/definitions';
 
 @Controller('users')
 export class AuthController {
-    constructor(private authService: AuthService){}
-
+  constructor(private authService: AuthService) {}
 
   @Post('login')
   async loginUser(@Body() body: LoginRequestBody) {

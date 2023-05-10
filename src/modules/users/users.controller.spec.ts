@@ -8,7 +8,7 @@ import { NotFoundException } from '@nestjs/common';
 
 describe('UsersController', () => {
   let controller: UsersController;
-  let mockUserService = {
+  const mockUserService = {
     getUsers: jest.fn(() => users),
     createUser: jest.fn(() => users[0]),
     getUserById: jest.fn((uuid: string) =>
@@ -81,8 +81,12 @@ describe('UsersController', () => {
   });
 
   it(`try to delete user which doesn't exist should throw error`, async () => {
-    await expect(controller.softDeleteUser('956b086d-f22d-43a3-8966-77dnotexist')).rejects.toThrow(NotFoundException);
-    await expect(controller.softDeleteUser('956b086d-f22d-43a3-8966-77dnotexist')).rejects.toThrow(`User doesn't exists`);
+    await expect(
+      controller.softDeleteUser('956b086d-f22d-43a3-8966-77dnotexist'),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      controller.softDeleteUser('956b086d-f22d-43a3-8966-77dnotexist'),
+    ).rejects.toThrow(`User doesn't exists`);
   });
 
   it(`try to delete active admin user will not succeed`, async () => {
@@ -92,6 +96,8 @@ describe('UsersController', () => {
     };
 
     expect(result.success).toBeFalsy();
-    expect(result.message).toBe('You are not able to delete user with Admin role which is active');
+    expect(result.message).toBe(
+      'You are not able to delete user with Admin role which is active',
+    );
   });
 });
