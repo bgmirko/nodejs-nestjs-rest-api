@@ -69,4 +69,4 @@ jobs:
       - name: Output content
         run: ls -R
       - name: Deploy
-        runs: echo "Deploying..."
+        run: echo "Deploying..."
