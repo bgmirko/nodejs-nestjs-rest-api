@@ -1,22 +1,6 @@
 name: Deploy Project
 on: [push, workflow_dispatch]
 jobs:
-  jest-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: cache-node-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Run tests
-        run: npm run test:github-exclude
   lint-check:
     runs-on: ubuntu-latest
     steps:
@@ -33,3 +17,44 @@ jobs:
         run: yarn install
       - name: Run Lint check
         run: npm run lint
+  jest-test:
+    needs: lint-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Run tests
+        run: npm run test:github-exclude
+  build:
+    needs: jest-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Build code
+        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-files
+          path: |
+            dist/main.js
+            dist/utils/*.js
