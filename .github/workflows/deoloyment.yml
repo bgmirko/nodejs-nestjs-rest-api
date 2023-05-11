@@ -64,8 +64,8 @@ jobs:
     steps:
       - name: Get artifact
         uses: actions/download-artifact@v3
-          with:
-            name: build-files
+        with:
+          name: build-files
       - name: Output content
         run: ls -R
       - name: Deploy
