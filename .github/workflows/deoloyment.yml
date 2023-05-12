@@ -49,7 +49,7 @@ jobs:
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:$PORT #requires database
       - name: Run tests
-        run: npm run test:github-exclude
+        run: npm run test
   build:
     needs: jest-test
     runs-on: ubuntu-latest
