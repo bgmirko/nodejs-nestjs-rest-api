@@ -28,11 +28,12 @@ jobs:
       POSTGRES_DB: postgres
       PORT: 5432
     services:
-      postgres-host: postgres
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: password
-        POSTGRES_DB: postgres
+      postgres-host: 
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: postgres
     steps:
       - name: Get code
         uses: actions/checkout@v3
