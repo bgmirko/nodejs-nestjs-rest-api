@@ -47,7 +47,7 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: yarn install
       - name: Run server
-        run: npm start & npm wait-on http://127.0.0.1:$PORT #requires database
+        run: npm start & npx wait-on http://127.0.0.1:$PORT #requires database
       - name: Run tests
         run: npm run test:github-exclude
   build:
