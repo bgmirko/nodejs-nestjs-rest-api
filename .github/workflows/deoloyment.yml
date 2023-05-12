@@ -25,7 +25,7 @@ jobs:
     env:
       DB_HOST: postgres-host
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
+      DB_NAME: test
       PORT: 5432
     services:
       postgres-host: 
