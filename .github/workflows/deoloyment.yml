@@ -20,6 +20,19 @@ jobs:
   jest-test:
     needs: lint-check
     runs-on: ubuntu-latest
+    container:
+      image: node:18
+    env:
+      DB_HOST: postgres-host
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+      PORT: 5432
+    services:
+      postgres-host: postgres
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: postgres
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -32,6 +45,8 @@ jobs:
       - name: Install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: yarn install
+      - name: Run server
+        run: npm start & npm wait-on http://127.0.0.1:$PORT #requires database
       - name: Run tests
         run: npm run test:github-exclude
   build:
