@@ -18,7 +18,7 @@ export class Book extends Model {
   id: number;
 
   @ForeignKey(() => User)
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.UUID })
   userUid: string;
 
   @Column
