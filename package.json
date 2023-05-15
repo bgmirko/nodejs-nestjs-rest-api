@@ -68,7 +68,9 @@
     "sequelize",
     "sequelize-typescript",
     "jest",
-    "rest api"
+    "rest api",
+    "docker",
+    "github actions"
   ],
   "jest": {
     "moduleFileExtensions": [
