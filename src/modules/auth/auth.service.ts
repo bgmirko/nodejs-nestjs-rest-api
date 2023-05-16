@@ -10,15 +10,16 @@ import {
   TokenData,
   ResponseTokenData,
   ResponseData,
-  LoginRequestBody,
 } from '../../utils/definitions';
 import { verify } from 'jsonwebtoken';
+import { LoginUserDto } from './dtos/login-user';
+import { RefreshTokenDto } from './dtos/refres-token';
 
 @Injectable()
 export class AuthService {
   constructor(private userService: UsersService) {}
 
-  async loginUser(body: LoginRequestBody) {
+  async loginUser(body: LoginUserDto) {
     const password: string = body.password;
     const username: string = body.username;
 
@@ -56,7 +57,7 @@ export class AuthService {
     }
   }
 
-  async refreshToken(body: { refreshToken: string }) {
+  async refreshToken(body: RefreshTokenDto) {
     if (!body.refreshToken) {
       throw new Error('refreshToken missing');
     }

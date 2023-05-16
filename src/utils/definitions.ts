@@ -30,8 +30,3 @@ export interface ResponseTokenData extends ResponseData {
   accessToken: string;
   refreshToken: string;
 }
-
-export interface LoginRequestBody {
-  username: string;
-  password: string;
-}
