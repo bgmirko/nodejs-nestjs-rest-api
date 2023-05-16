@@ -23,7 +23,7 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({ name: 'role', enum: RoleType })
   @IsEnum(RoleType)
   role: RoleType;
 

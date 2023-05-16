@@ -20,12 +20,14 @@ import {
   TokenUserPayload,
 } from '../../utils/definitions';
 import { AdminGuard } from '../../guards/admin.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('books')
 export class BookController {
   constructor(private bookService: BookService) {}
 
   @Get()
+  @ApiBearerAuth()
   @UseGuards(AdminGuard)
   async getBooks(@Query() query) {
     const { rows, count } = await this.bookService.getBooks(query);

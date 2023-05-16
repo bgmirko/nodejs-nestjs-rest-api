@@ -7,6 +7,7 @@ export function swaggerSetup(app: INestApplication) {
     .setDescription('Documentation for Library management')
     .setVersion('1.0')
     .addTag('books')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
