@@ -8,13 +8,11 @@ import {
   Delete,
   NotFoundException,
   Query,
-  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { RoleType } from '../../utils/definitions';
-import { LoggingInterceptor } from '../../interceptors/consoleLogging.interceptor';
 import { CurrentUser } from '../../decorators/current-user.decorator';
 import { UpdateUserDto } from './dtos/update-user.dto';
 
@@ -30,7 +28,6 @@ export class UsersController {
   }
 
   @Get()
-  @UseInterceptors(LoggingInterceptor)
   async getUsers(@Query() query) {
     return this.userService.getUsers(query);
   }
@@ -52,7 +49,6 @@ export class UsersController {
   @Delete('/:id')
   async softDeleteUser(@Param('id') id: string) {
     const user = await this.userService.getUserById(id);
-    console.log(user);
     if (!user) {
       throw new NotFoundException("User doesn't exists");
     }

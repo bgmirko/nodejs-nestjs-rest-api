@@ -10,6 +10,7 @@ import {
   NotFoundException,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './book.entity';
@@ -21,14 +22,13 @@ import {
 } from '../../utils/definitions';
 import { AdminGuard } from '../../guards/admin.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { LoggingInterceptor } from 'interceptors/consoleLogging.interceptor';
 
 @Controller('books')
 export class BookController {
   constructor(private bookService: BookService) {}
 
   @Get()
-  @ApiBearerAuth()
-  @UseGuards(AdminGuard)
   async getBooks(@Query() query) {
     const { rows, count } = await this.bookService.getBooks(query);
     return {
@@ -38,6 +38,21 @@ export class BookController {
         totalCount: count,
       },
       message: 'List of books fetch successfully',
+    };
+  }
+
+  @Get('/:id')
+  @ApiBearerAuth()
+  @UseInterceptors(LoggingInterceptor)
+  @UseGuards(AdminGuard)
+  async getBook(@Param('id') id: number) {
+    const book = await this.bookService.getBookById(id);
+    return {
+      success: true,
+      data: {
+        book: book,
+      },
+      message: 'Book fetched successfully',
     };
   }
 
