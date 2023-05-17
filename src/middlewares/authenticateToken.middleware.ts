@@ -6,7 +6,8 @@ import { NestMiddleware, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthenticateUserToken implements NestMiddleware {
-  async use(req: RequestCustom, res: Response, next: NextFunction) {
+  use(req: RequestCustom, res: Response, next: NextFunction) {
+    console.log('---> enter in middleware');
     const authHeader: string = req.headers['authorization'];
     const token: string = authHeader && authHeader.split(' ')[1];
     if (token) {
