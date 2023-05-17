@@ -96,7 +96,7 @@ describe('UsersService', () => {
     const result = await service.getUsers(query);
 
     expect(mockGetUsers).toBeCalledWith({
-      attributes: { exclude: ['deleteAt'] },
+      attributes: { exclude: ['deleteAt', 'password'] },
       include: [{ model: Book, as: 'books' }],
       offset: query?.cursor ?? 0,
       limit: query?.limit ?? 10,
