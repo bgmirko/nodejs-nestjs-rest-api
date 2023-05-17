@@ -3,6 +3,7 @@ import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { Book } from '../books/book.entity';
 import { hash } from 'bcryptjs';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -40,7 +41,7 @@ export class UsersService {
   /*
    * Update User data
    */
-  async updateUser(id: string, userData: Partial<User>): Promise<User> {
+  async updateUser(id: string, userData: UpdateUserDto): Promise<User> {
     await this.usersRepository.update(
       {
         ...userData,

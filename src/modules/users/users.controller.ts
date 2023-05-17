@@ -16,6 +16,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { RoleType } from '../../utils/definitions';
 import { LoggingInterceptor } from '../../interceptors/consoleLogging.interceptor';
 import { CurrentUser } from '../../decorators/current-user.decorator';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -40,7 +41,7 @@ export class UsersController {
   }
 
   @Put('/:id')
-  async updateUser(@Param('id') id: string, @Body() body: Partial<User>) {
+  async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     const user = await this.userService.getUserById(id);
     if (!user) {
       throw new NotFoundException("User doesn't exists");
