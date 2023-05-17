@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  HasMany,
+  AfterCreate,
+  AfterUpdate,
+} from 'sequelize-typescript';
 import { RoleType } from '../../utils/definitions';
 import { Book } from '../books/book.entity';
 
@@ -36,4 +44,14 @@ export class User extends Model {
     foreignKey: 'userUid',
   })
   books: Book[];
+
+  @AfterCreate
+  static afterCreateHook(instance: User, options: any): void {
+    delete instance.dataValues['password'];
+  }
+
+  @AfterUpdate
+  static afterUpdateHook(instance: User, options: any): void {
+    delete instance.dataValues['password'];
+  }
 }
