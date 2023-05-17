@@ -21,7 +21,7 @@ import {
 } from '../../utils/definitions';
 import { AdminGuard } from '../../guards/admin.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { LoggingInterceptor } from 'interceptors/consoleLogging.interceptor';
+import { LoggingInterceptor } from '../../interceptors/consoleLogging.interceptor';
 import { UpdateBookDto } from './dtos/update-book';
 
 @Controller('books')
