@@ -15,11 +15,13 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { RoleType } from '../../utils/definitions';
 import { CurrentUser } from '../../decorators/current-user.decorator';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @ApiBearerAuth()
   @Get('/whoami')
   async whoAmI(
     @CurrentUser({ example: 'data to send to decorator' }) user: User,

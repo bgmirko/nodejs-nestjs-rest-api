@@ -13,7 +13,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { BookService } from './book.service';
-import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book';
 import {
   RequestCustom,
@@ -23,6 +22,7 @@ import {
 import { AdminGuard } from '../../guards/admin.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { LoggingInterceptor } from 'interceptors/consoleLogging.interceptor';
+import { UpdateBookDto } from './dtos/update-book';
 
 @Controller('books')
 export class BookController {
@@ -89,7 +89,7 @@ export class BookController {
   @Put('/:id')
   async updateBook(
     @Param('id') id: number,
-    @Body() body: Partial<Book>,
+    @Body() body: UpdateBookDto,
     @Req() req: RequestCustom,
   ) {
     const book = await this.bookService.getBookById(id);

@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dtos/create-book';
+import { UpdateBookDto } from './dtos/update-book';
 
 @Injectable()
 export class BookService {
@@ -44,7 +45,7 @@ export class BookService {
   /*
    * Update Book data
    */
-  async updateBook(id: number, bookData: Partial<Book>): Promise<Book> {
+  async updateBook(id: number, bookData: UpdateBookDto): Promise<Book> {
     await this.bookRepository.update(
       {
         ...bookData,

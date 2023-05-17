@@ -18,4 +18,4 @@ to have migrations
 
 http://localhost:3000/api/
 
-Some routes are protected. You may use login route to login user with username and password (from src/database/seeders/*-create-dummy-users.ts) and use token from response in other protected routes like Header Bearer Token
+Some routes are protected. You may use login route to login user with username and password (from src/database/seeders/*-create-dummy-users.ts or username: petar80, password: test123) and use token from response in other protected routes like Header Bearer Token
