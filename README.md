@@ -1,21 +1,35 @@
 # Run the project
 
-1. Build images and run containers
-docker compose up -d 
+1. Build images and run containers:
+
+"docker compose up -d" 
 or 
-docker-compose up -d
+"docker-compose up -d"
 
-2. To enter into server bash: "docker exec -it nodejs-nestjs-example-api-app-1 sh" (check container name with "docker ps")
+2. To enter into docker container with Shell: 
 
-3. Change directory: "cd src/database"
+"docker exec -it nodejs-nestjs-example-api-app-1 sh"
 
-Database tables will be created programmatically (in step 1) it is not necessary
+(check container name with "docker ps")
+
+3. Change directory inside container: 
+
+"cd src/database"
+
+4. Populate database with dummy data from seeders:
+
+"npx sequelize-cli db:seed:all"
+
+Database tables were created programmatically (step 1), it is not necessary
 to have migrations
 
-4. To fill database tables with data, in shell run seeders: "npx sequelize-cli db:seed:all"
-
-# Swagger api documentation
+# Swagger API documentation
 
 http://localhost:3000/api/
 
-Some routes are protected. You may use login route to login user with username and password (from src/database/seeders/*-create-dummy-users.ts or username: petar80, password: test123) and use token from response in other protected routes like Header Bearer Token
+Few routes are protected with Bearer Token. Use login route to gain that token.
+
+To login:
+- Use user with username: petar80 and password: test123 
+- Use any user from src/database/seeders/*-create-dummy-users.ts file 
+- Create new user.
