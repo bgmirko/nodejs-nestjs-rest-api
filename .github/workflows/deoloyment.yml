@@ -34,6 +34,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: postgres
+          PORT: 5432
     steps:
       - name: Get code
         uses: actions/checkout@v3
