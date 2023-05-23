@@ -6,7 +6,7 @@
 or 
 "docker-compose up -d"
 
-2. To enter into docker container with Shell: 
+2. Enter to docker container with Shell: 
 
 "docker exec -it nodejs-nestjs-example-api-app-1 sh"
 

@@ -1,20 +1,14 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Book } from '../modules/books/book.entity';
 import { User } from '../modules/users/user.entity';
-require('dotenv').config();
+const config = require('./config/config.js');
 
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
-      const sequelize = new Sequelize({
-        dialect: 'postgres',
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT),
-        username: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-      });
+      const env = process.env.NODE_ENV || 'development';
+      const sequelize = new Sequelize(config[env]);
       sequelize.addModels([User, Book]);
       await sequelize.sync();
       return sequelize;
