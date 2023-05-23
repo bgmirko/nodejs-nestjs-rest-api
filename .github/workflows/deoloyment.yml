@@ -26,7 +26,7 @@ jobs:
       DB_HOST: postgres-host
       POSTGRES_PASSWORD: password
       DB_NAME: postgres
-      PORT: 5432
+      TEST_DB_PORT: 5432
     services:
       postgres-host: 
         image: postgres
@@ -34,7 +34,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: postgres
-          PORT: 5432
     steps:
       - name: Get code
         uses: actions/checkout@v3
