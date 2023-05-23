@@ -23,17 +23,17 @@ jobs:
     container:
       image: node:18
     env:
-      DB_HOST: postgres-host
+      DB_HOST: db-test
       POSTGRES_PASSWORD: password
-      DB_NAME: postgres
-      PORT: 5432
+      DB_NAME: postgres-test
+      PORT: 5430
     services:
-      postgres-host: 
+      db-test: 
         image: postgres
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: postgres
+          POSTGRES_DB: postgres-test
     steps:
       - name: Get code
         uses: actions/checkout@v3
