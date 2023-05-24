@@ -27,6 +27,8 @@ jobs:
       POSTGRES_PASSWORD: password
       DB_NAME: postgres
       TEST_DB_PORT: 5432
+      TEST_DATABASE: postgres
+      TEST_DB_HOST: postgres-host
     services:
       postgres-host: 
         image: postgres
