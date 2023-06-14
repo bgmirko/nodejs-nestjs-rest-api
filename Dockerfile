@@ -4,12 +4,12 @@ WORKDIR /app
 
 COPY package.json /app
 
-RUN yarn install
+RUN npm install
 
 COPY . /app
 
-RUN yarn run build
+RUN npm run build
 
 EXPOSE 3000
 
-CMD yarn start
+CMD npmS start
